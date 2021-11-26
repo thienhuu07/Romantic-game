@@ -14,37 +14,37 @@ screen = pygame.display.set_mode((800,600))
 background = pygame.image.load('background.png')
 
 # you
-haiImg = []
-haiX = []
-haiY = []
-haiX_change = []
-haiY_change = []
-num_of_hai = 5
+thienImg = []
+thienX = []
+thienY = []
+thienX_change = []
+thienY_change = []
+num_of_thien = 5
 
-for i in range(num_of_hai):
-    haiImg.append(pygame.image.load('hai.png'))
-    haiX.append(random.randint(0,735))
-    haiY.append(random.randint(20,150))
-    haiX_change.append(0.2)
-    haiY_change.append(20)
+for i in range(num_of_thien):
+    thienImg.append(pygame.image.load('thien.png'))
+    thienX.append(random.randint(0,735))
+    thienY.append(random.randint(20,150))
+    thienX_change.append(0.2)
+    thienY_change.append(20)
 
-    def hai(x,y,i):
-        screen.blit(haiImg[i],(x,y))
+    def thien(x,y,i):
+        screen.blit(thienImg[i],(x,y))
 
 # your girl friend
-nganImg = pygame.image.load('ngan.png')
-nganX = 380
-nganY = 500
-nganX_change = 0
-nganY_change = 0
+tuyenImg = pygame.image.load(tuyen.png')
+tuyenX = 380
+tuyenY = 500
+tuyenX_change = 0
+tuyenY_change = 0
 
-def ngan(x,y):
-    screen.blit(nganImg,(x,y))
+def tuyen(x,y):
+    screen.blit(tuyenImg,(x,y))
 
 # heart
 heartImg = pygame.image.load('heart.png')
 heartX = 0
-heartY = nganY
+heartY = tuyenY
 heartX_change = 0
 heartY_change = 0.4
 
@@ -61,8 +61,8 @@ icon = pygame.image.load('heart.png')
 pygame.display.set_icon(icon)
 
 # check colision
-def iscollision(haiX,haiY,heartX,heartY):
-    distance = math.sqrt(math.pow(haiX - heartX,2)+math.pow(haiY - heartY,2))
+def iscollision(thienX,thienY,heartX,heartY):
+    distance = math.sqrt(math.pow(thienX - heartX,2)+math.pow(thienY - heartY,2))
 
     if distance < 27:
         return True
@@ -84,7 +84,7 @@ def show_score(x,y):
 over_font = pygame.font.Font('freesansbold.ttf',64)
 
 def game_over_text():
-    over_text = over_font.render("You lost but I still love u" ,True, (150,150,255))
+    over_text = over_font.render("You lost, but I still LOVE You!!!!!!" ,True, (150,150,255))
     screen.blit(over_text,(30,250))
 
 # sound and music
@@ -100,69 +100,69 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                nganX_change = 1
+                tuyenX_change = 1
             if event.key == pygame.K_LEFT:
-                nganX_change = -1
+                tuyenX_change = -1
             if event.key == pygame.K_UP:
-                nganY_change = -1
+                tuyenY_change = -1
             if event.key == pygame.K_DOWN:
-                nganY_change = 1
+                tuyenY_change = 1
             if event.key == pygame.K_SPACE:
                 if heart_state == "ready":
-                    heartX = nganX
-                    heartY = nganY
+                    heartX = tuyenX
+                    heartY = tuyenY
                     heart(heartX,heartY)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
-                nganX_change = 0
+                tuyenX_change = 0
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                nganY_change = 0
+                tuyenY_change = 0
 
-    ngan(nganX,nganY)
-    nganX += nganX_change
-    nganY += nganY_change
+    tuyen(tuyenX,tuyenY)
+    tuyenX += tuyenX_change
+    tuyenY += tuyenY_change
 
-    if nganX <=0:
-        nganX = 0 
-    elif nganX >=736:
-        nganX = 736
+    if tuyenX <=0:
+        tuyenX = 0 
+    elif tuyenX >=736:
+        tuyenX = 736
 
-    if nganY <= 400: 
-        nganY = 400
-    elif nganY >=530:
-        nganY = 529
+    if tuyenY <= 400: 
+        tuyenY = 400
+    elif tuyenY >=530:
+        tuyenY = 529
 
-    for i in range(num_of_hai):
+    for i in range(num_of_thien):
         # game over
-        if haiY[i] > 200:
-            for j in range(num_of_hai):
-                haiY[j] =2000
+        if thienY[i] > 200:
+            for j in range(num_of_thien):
+                thienY[j] =2000
             game_over_text()
             break
 
-        hai(haiX[i],haiY[i],i)
+        thien(thienX[i],thienY[i],i)
 
-        if haiX[i] <= 0:
-            haiX_change[i] = 0.2
-            haiY[i] += haiY_change[i]
-        if haiX[i] >= 736:
-            haiX_change[i] = -0.2
-            haiY[i] += haiY_change[i]
+        if thienX[i] <= 0:
+            thienX_change[i] = 0.2
+            thienY[i] += thienY_change[i]
+        if thienX[i] >= 736:
+            thienX_change[i] = -0.2
+            thienY[i] += thienY_change[i]
 
-        haiX[i] += haiX_change[i]
+        thienX[i] += thienX_change[i]
            
-        collision = iscollision(haiX[i],haiY[i],heartX,heartY)
+        collision = iscollision(thienX[i],thienY[i],heartX,heartY)
         if collision:
             heart_state = "ready"
-            haiY[i] = random.randint(50,150)
-            haiX[i] = random.randint(0,735)
+            thienY[i] = random.randint(50,150)
+            thienX[i] = random.randint(0,735)
             score_value += 1
             explosion_sound = mixer.Sound('tick.wav')
             explosion_sound.play()
 
     if heartY <= 0:
-        heartY = nganY
+        heartY = tuyenY
         heart_state ="ready" 
     if heart_state == "fire":
         heartY -= heartY_change
